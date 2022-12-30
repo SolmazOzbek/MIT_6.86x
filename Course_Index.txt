@@ -1,0 +1,42 @@
+UNIT 0: Brief Prerequisite Reviews
+
+UNIT 1: Linear Classifiers and Generalization
+        Lecture 1: Introduction to Machine Learning
+        Lecture 2: Linear Classifier and Perceptron
+        Lecture 3: Hinge Loss, Margin Boundaries and Regularization
+        Lecture 4: Linear Classification and Generalization
+        
+        Project 1: Automatic Review Analyzer
+        Recitation 1: Turning the Regularization Hyperparameter by Cross Validation and a Demonstration
+        
+UNIT 2: Nonlinear Classification, Linear Regression, Collaborative Filtering
+        Lecture 5: Linear Regression
+        Lecture 6: Nonlinear Classifier
+        Lecture 7: Recommender Systems
+        
+        Project 2: Digit Recognition (Part 1)
+
+UNIT 3: Neural Networks 
+        Lecture 8: Introduction to Feedforward Neural Networks
+        Lecture 9: Feedforward Neural Networks, Back Propgagation, and Stochastic Gradient Descent (SGD)
+        Lecture 10: Recurrent Neural Networks 1
+        Lecture 11: Recurrent Neural Networks 2
+        Lecture 12: Convolutional Neural Networks
+        
+        Project: Digit Recognition (Part 2)
+  
+UNIT 4: Unsupervised Learning
+        Lecture 13: Clustering 1
+        Lecture 14: Clustering 2
+        Lecture 15: Generative Models
+        Lecture 16: Mixture Models; EM Algorithm
+        
+        Project 4: Collaborative Filtering via Gaussian Mixtures
+        
+UNİT 5: Reinforcement Learning
+        Lecture 17: Reinforcement Learning 1
+        Lecture 18: Reinforcement Learning 2
+        Lecture 19: Applications: Natural Language Processing
+        
+        Project: Text-Based Game
+        
