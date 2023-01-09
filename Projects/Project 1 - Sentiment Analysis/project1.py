@@ -34,8 +34,7 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
     """
     y = theta @ feature_vector + theta_0
     return max(0, 1 - y * label)
-    raise NotImplementedError
-
+  
 
 def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     """
@@ -58,7 +57,6 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     ys = feature_matrix @ theta + theta_0
     loss = np.maximum(1 - ys * labels, np.zeros(len(labels)))
     return np.mean(loss)
-    raise NotImplementedError
 
 
 def perceptron_single_step_update(
@@ -86,7 +84,6 @@ def perceptron_single_step_update(
     if label * (np.dot(current_theta, feature_vector) + current_theta_0) <= 1e-7:
         return (current_theta + label * feature_vector, current_theta_0 + label)
     return (current_theta, current_theta_0)
-    raise NotImplementedError
 
 
 def perceptron(feature_matrix, labels, T):
@@ -123,9 +120,6 @@ def perceptron(feature_matrix, labels, T):
             theta, theta_0 = perceptron_single_step_update(feature_matrix[i], labels[i], theta, theta_0)
     
     return (theta, theta_0)
-    
-            #pass
-    raise NotImplementedError
 
 
 def average_perceptron(feature_matrix, labels, T):
@@ -161,16 +155,15 @@ def average_perceptron(feature_matrix, labels, T):
     theta = np.zeros(n_features)
     t_sum = np.zeros(n_features)
     theta_0 = 0.0
-    t_0_sum = 0.0
+    theta_0_sum = 0.0
 
     for t in range(T):
         for i in get_order(feature_matrix.shape[0]):
             theta, theta_0 = perceptron_single_step_update(feature_matrix[i], labels[i], theta, theta_0)
-            t_sum += theta
-            t_0_sum += theta_0
+            theta_sum += theta
+            theta_0_sum += theta_0
     
-    return (t_sum / (m_samples * T)), (t_0_sum / (m_samples * T))
-    raise NotImplementedError
+    return (theta_sum / (m_samples * T)), (theta_0_sum / (m_samples * T))
 
 
 def pegasos_single_step_update(
@@ -203,7 +196,6 @@ def pegasos_single_step_update(
             return (((1 - (eta * L)) * current_theta) + (eta * label * feature_vector), (current_theta_0) + (eta * label))
         
     return ((1 - (eta * L)) * current_theta, current_theta_0)
-    raise NotImplementedError
 
 
 def pegasos(feature_matrix, labels, T, L):
@@ -246,7 +238,7 @@ def pegasos(feature_matrix, labels, T, L):
             theta, theta_0 = pegasos_single_step_update(feature_matrix[i], labels[i], L, eta, theta, theta_0)
     
     return theta, theta_0
-    raise NotImplementedError
+  
 
 # Part II
 
@@ -268,17 +260,22 @@ def classify(feature_matrix, theta, theta_0):
     given theta and theta_0. If a prediction is GREATER THAN zero, it should
     be considered a positive classification.
     """
-    predictions = np.zeros(feature_matrix.shape[0])
-    for i in range(len(feature_matrix)):               
-        
-        if (np.dot(feature_matrix[i], theta) + theta_0) > 0:
-            predictions[i] = 1        
+    
+    nsamples, nfeatures = feature_matrix.shape
+    predictions = np.zeros(nsamples)
+    for i in range(nsamples):
+        feature_vector = feature_matrix[i]
+        prediction = np.dot(theta, feature_vector) + theta_0
+        if (prediction > 0):
+            predictions[i] = 1
         else:
             predictions[i] = -1
-           
     return predictions
-    raise NotImplementedError
 
+#or
+#def classify(feature_matrix, theta, theta_0):
+    #return (feature_matrix @ theta + theta_0 > 1e-7) * 2.0 - 1 
+    
 
 def classifier_accuracy(
         classifier,
@@ -312,14 +309,15 @@ def classifier_accuracy(
     trained classifier on the training data and the second element is the
     accuracy of the trained classifier on the validation data.
     """
+    
     theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
     train_predictions = classify(train_feature_matrix, theta, theta_0)
     val_predictions = classify(val_feature_matrix, theta, theta_0)
     train_accuracy = accuracy(train_predictions, train_labels)
     validation_accuracy = accuracy(val_predictions, val_labels)
+    
+    return (train_accuracy, validation_accuracy)
 
-    return train_accuracy, validation_accuracy
-    raise NotImplementedError
 
 
 def extract_words(input_string):
